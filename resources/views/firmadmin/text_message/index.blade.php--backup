@@ -1,0 +1,128 @@
+@extends('firmlayouts.admin-master')
+
+@section('title')
+Text Message
+@endsection
+
+@push('header_styles')
+<link  href="{{  asset('assets/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+@endpush  
+
+@section('content')
+<section class="section">
+  <div class="section-header">
+    <h1>Text Message</h1>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item">
+        <a href="{{route('firm.admindashboard')}}">Dashboard</a>
+      </div>
+      <div class="breadcrumb-item">
+        <a href="{{route('firm.client')}}">Client</a>
+      </div>
+      <div class="breadcrumb-item">
+        <a href="#">Text Messages</a>
+      </div>
+    </div>
+  </div>
+  <div class="section-body">
+       
+     <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Text Messages</h4>
+            <div class="card-header-action">
+              <a href="" class="btn btn-primary trigger--fire-modal-2" id="fire-modal-2">Add <i class="fas fa-plus"></i></a>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="table-responsive table-invoice">
+              <table class="table table table-bordered table-striped"  id="table" >
+                <thead>
+                  <tr>
+                   <th> ID </th>
+                   <th> From </th>
+                   <th> To </th>
+                   <th> Message </th>
+                   <th> Date </th>
+                  </tr>
+                </thead>
+                
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     </div>
+  </div>
+</section>
+
+ <div class="modalformpart" id="modal-form-part" style="display: none;">
+    <form action="{{ url('firm/lead/create_lead_note') }}" method="post" class="needs-validation" enctype="multipart/form-data" novalidate="">
+    <div class="row">  
+      <div class="col-md-12">
+        Text Message 
+        <br>
+      </div>
+      <div class="col-md-12">
+        <textarea name="msg" class="form-control" style="height: 150px;"></textarea>
+      </div>
+    </div>
+    <div class="row">  
+      <div class="col-md-12 text-right">
+        <input type="hidden" name="to" value="{{$id}}" >  
+        @csrf
+        <input type="submit" name="save" value="Send" class="btn btn-primary saveclientinfo_form"/>
+      </div>
+    </div>
+    </form>
+  </div>
+
+@endsection
+
+@push('footer_script')
+
+<script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript">
+  var index_url = "{{url('firm/client/text_message/getData/')}}/{{$id}}";
+  $('#table').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: index_url,
+    "order": [[ 0, "desc" ]],
+    columns: [
+    { data: 'id', name: 'id'},
+    { data: 'msgfrom', name: 'msgfrom'},
+    { data: 'msgto', name: 'msgto'},
+    { data: 'msg', name: 'msg'},
+    { data: 'created_at', name: 'created_at'},
+    ],
+  });
+  $(document).ready(function(){
+    $("#fire-modal-2").fireModal({title: 'Text Message', body: $("#modal-form-part"), center: true});
+
+    $('.saveclientinfo_form').on('click', function(e){
+      e.preventDefault();
+      var to = $('input[name="to"]').val();
+      var msg = $('textarea[name="msg"]').val();
+      var _token = $('input[name="_token"]').val();
+      if(msg == '') {
+        alert('Text Message is required!');
+        return false;
+      }
+      $.ajax({
+        type:"post",
+        url:"{{ url('firm/client/send_text_msg') }}",
+        data: {msg:msg, to:to, _token:_token},
+        success:function(res)
+        {       
+         alert('Text Message send successfully');
+         window.location.href = "{{ url('firm/client/text_message') }}/{{$id}}";
+       }
+     });
+    });
+  });
+</script>
+
+@endpush 

@@ -1,0 +1,34 @@
+<?php
+	Route::get('userclient', 'adminuser\UserClientController@userclient')->name('userclient');
+	Route::get('userclient/viewclient/{id}', 'adminuser\UserClientController@viewclient')->name('userclient.viewclient');
+	Route::get('userclient/profile/{id}', 'adminuser\UserClientController@profile')->name('userclient.profile');
+	Route::get('userclient/clientcases/{id}', 'adminuser\UserClientController@clientcases')->name('userclient.clientcases');
+	Route::get('userclient/viewfamily/{id}', 'adminuser\UserClientController@viewfamily')->name('userclient.viewfamily');
+	Route::get('userclient/addfamily/{id}', 'adminuser\UserClientController@addfamily')->name('userclient.addfamily');
+	Route::get('userclient/editfamily/{id}/{fid}', 'adminuser\UserClientController@editfamily')->name('userclient.editfamily');
+	Route::get('userclient/deletefamily/{id}/{fid}', 'adminuser\UserClientController@deletefamily')->name('userclient.deletefamily');
+	Route::post('userclient/updatefamily', 'adminuser\UserClientController@updatefamily')->name('userclient.updatefamily');
+	Route::post('userclient/createfamily', 'adminuser\UserClientController@createfamily')->name('userclient.createfamily');
+	Route::get('userclient/clientdocument/{id}', 'adminuser\UserClientController@clientdocument')->name('userclient.clientdocument');
+	Route::post('userclient/Set_Client_Document', 'adminuser\UserClientController@Set_Client_Document')->name('userclient.Set_Client_Document');
+	Route::get('userclient/deletedoc/{id}/{tid}', 'adminuser\UserClientController@deletedoc')->name('userclient.deletedoc');
+	Route::get('userclient/viewnotes/{id}', 'adminuser\UserClientController@viewnotes')->name('userclient.viewnotes');
+	Route::get('userclient/deletenotes/{id}/{nid}', 'adminuser\UserClientController@deletenotes')->name('userclient.deletenotes');
+	Route::get('userclient/viewinbox/{id}', 'adminuser\UserClientController@viewinbox')->name('userclient.viewinbox');
+	Route::post('userclient/addnotes', 'adminuser\UserClientController@addnotes')->name('userclient.addnotes');
+	Route::get('userclient/clienttasks/{id}', 'adminuser\UserClientController@clienttasks')->name('userclient.clienttasks');
+	Route::get('userclient/addclienttask/{id}', 'adminuser\UserClientController@addclienttask')->name('userclient.addclienttask');
+	Route::post('userclient/insertclienttask', 'adminuser\UserClientController@insertclienttask')->name('userclient.insertclienttask');
+	Route::get('userclient/editclienttask/{id}/{tid}', 'adminuser\UserClientController@editclienttask')->name('userclient.editclienttask');
+	Route::post('userclient/updateclienttask', 'adminuser\UserClientController@updateclienttask')->name('userclient.updateclienttask');
+	Route::get('userclient/clientsevents/{id}', 'adminuser\UserClientController@clientsevents')->name('userclient.clientsevents');
+	Route::get('userclient/createevent/{id}', 'adminuser\UserClientController@createevent')->name('userclient.createevent');
+	Route::post('userclient/createclientevent', 'adminuser\UserClientController@createclientevent')->name('userclient.createclientevent');
+	Route::get('userclient/clienteditevent/{id}/{tid}', 'adminuser\UserClientController@clienteditevent')->name('userclient.clienteditevent');
+	Route::get('userclient/getDataClientDocument/{id}', 'adminuser\UserClientController@getDataClientDocument')->name('userclient.getDataClientDocument');
+	Route::post('userclient/updateforms', 'adminuser\UserClientController@updateforms')->name('updateforms');
+
+	Route::get('userclient/editclientdocument/{id}/{did}', 'adminuser\UserClientController@editclientdocument')->name('userclient.editclientdocument');
+	Route::post('userclient/updaterequestdocuments', 'adminuser\UserClientController@updaterequestdocuments')->name('updaterequestdocuments');
+	Route::get('userclient/uploadclientdocument/{id}/{did}', 'adminuser\UserClientController@uploadclientdocument')->name('userclient.uploadclientdocument');
+	Route::post('userclient/upload_req_doc', 'adminuser\UserClientController@upload_req_doc')->name('upload_req_doc');
